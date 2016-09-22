@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>Listy zakupów</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <style>
+  ul { list-style-type: none; margin: 0; padding: 0; margin-bottom: 10px; }
+  li { margin: 5px; padding: 5px; width: 150px; }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#sortable" ).sortable({
+      revert: true
+    });
+    
+    $( "ul, li" ).disableSelection();
+  } );
+  
+//   $( function() {
+//    $( ".widget input[type=submit], .widget a, .widget button" ).button();
+//    $( "button, input, a" ).click( function( event ) {
+//      event.preventDefault();
+//    } );
+//  } );
+  </script>
+</head>
+<body>
+<h1>Listy zakupów</h1>
+<div>Oto Twoje listy:</div>
+{% if lists %}
+{% for list in lists %}
+<div align=justify>
+<p class="ui-state-default">{{ list.title }},
+<p class="ui-state-default">{{ list.number }} </p>
+</p>
+<button>Usuń listę</button>
+{% if products %}
+<ul id="sortable">
+{% for product in products %}
+<li class="ui-state-default"><a href="details.html">{{ product.name }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+<strong>Nie utworzono jeszcze żadnego produktu.</strong>
+{% endif %}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="widget">
+  <button>Dodaj listę</button>
+</div>
+
+<div>
+<a href="/admin">Przejdź do panelu admina</a><br />
+</div>
+</body>
+</html>
